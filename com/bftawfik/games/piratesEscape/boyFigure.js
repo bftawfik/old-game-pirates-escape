@@ -66,6 +66,7 @@ function BoyFigure(gsr){
           this.currentState = this.states.jumping.name;
           this.currentRealFrame = 0;
           this.currentFrame = Math.floor(this.currentRealFrame*this.frFix) % this.states[this.currentState].frames.length;
+          this.jumpSound();
         }
       break;
       case this.states.killed.name:
@@ -104,6 +105,7 @@ function BoyFigure(gsr){
     }else if(this.currentState == this.states.jumping.name) {
       if(this.currentFrame == this.states[this.currentState].frames.length-1){
         this.changeState(this.states.walking);
+        this.landSound();
         this.currentRealFrame = 0;
         this.currentFrame = Math.floor(this.currentRealFrame*this.frFix) % this.states[this.currentState].frames.length;
       }
@@ -168,4 +170,11 @@ function BoyFigure(gsr){
     return tempObj;
   }
   //---------------------------------------------------------------
+  this.jumpSound = function(){
+    playJumpSound();
+  }
+  //---------------------------------------------------------------
+  this.landSound = function(){
+  	playLandSound();
+  }
 }

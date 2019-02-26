@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Allow fullscreen mode on iOS devices. (These are Apple specific meta tags.) -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+  	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  	<link rel="apple-touch-icon" sizes="256x256" href="icon-256.png" />
+  	<meta name="HandheldFriendly" content="true" />
+
+  	<!-- Chrome for Android web app tags -->
+  	<meta name="mobile-web-app-capable" content="yes" />
+    <title>Pirates Escape V1.5</title>
+    <link rel="stylesheet" type="text/css" href="css/piratesEscape_v1.5.css">
+    </head>
+  <body>
+    <script src="com/bftawfik/lib/jquery-3.1.0.min.js"></script>
+    <script src="com/bftawfik/games/piratesEscape/dependants.js"></script>
+    <script src="com/bftawfik/games/piratesEscape/piratesEscape-1.5.js"></script>
+  </body>
+  <script type="text/javascript">
+  $(window).bind(
+    'touchmove',
+    function(e) {
+      e.preventDefault();
+    }
+  );
+  </script>
+</html>

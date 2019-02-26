@@ -1,5 +1,5 @@
 function AutoResize(direction){
-
+  var elements = [];
   this.direction = direction;
   this.allDirections = {
     portrait: "portrait",
@@ -16,9 +16,13 @@ function AutoResize(direction){
   this.ratio = null;
   this.width = null;
   this.height = null;
-  this.gameCnvs = null;
+  // this.gameCnvs = null;
   //-----------------------------------------------------------
-  this.init = function(gameCnvs){
+  this.addElement = function(elem){
+    elements.push(elem);
+  }
+  //-----------------------------------------------------------
+  this.init = function(){
     console.log('init');
     if(this.direction == this.allDirections.portrait){
       this.ratio = this.mainWidth / this.mainHeight;
@@ -27,9 +31,19 @@ function AutoResize(direction){
     }
     this.width = this.mainWidth;
     this.height = this.mainHeight;
-    this.gameCnvs = gameCnvs;
-    this.gameCnvs.width = this.mainWidth;
-    this.gameCnvs.height = this.mainHeight;
+    //this.gameCnvs = gameCnvs;
+    for(var elemCount = 0; elemCount < elements.length; elemCount++){
+      var tempElement = elements[elemCount];
+      if(tempElement.tagName =="CANVAS"){
+        tempElement.width = this.mainWidth;
+        tempElement.height = this.mainWidth;
+      }else{
+        tempElement.style.width = (this.mainWidth+2)+"px";
+        tempElement.style.height = (this.mainWidth+2)+"px";
+      }
+      tempElement.style.top = ((window.innerHeight - this.height)/2)+"px";
+      tempElement.style.left = ((window.innerWidth - this.width)/2)+"px";
+    }
     //
     this.ua = navigator.userAgent.toLowerCase();
     this.android = this.ua.indexOf('android') > -1 ? true : false;
@@ -38,6 +52,18 @@ function AutoResize(direction){
   };
   //-----------------------------------------------------------
   this.resize = function() {
+    if(window.innerHeight > window.innerWidth){
+      var dOrientation = "portrait";
+    }else{
+      var dOrientation = "landscape";
+    }
+    if(dOrientation == this.direction){
+      game.rightOrientation = true;
+  		// console.log(true);
+  	}else{
+      game.rightOrientation = false;
+  		// console.log(false);
+  	}
     if(this.direction == this.allDirections.portrait){
       var newHeight = window.innerHeight;
       var newWidth = newHeight * this.ratio;
@@ -64,11 +90,21 @@ function AutoResize(direction){
     if (this.android || this.ios) {
       document.body.style.height = (window.innerHeight + 50) + 'px';
     }
-    this.gameCnvs.width = this.width;
-    this.gameCnvs.height = this.height;
+    for(var elemCount = 0; elemCount < elements.length; elemCount++){
+      var tempElement = elements[elemCount];
+      if(tempElement.tagName =="CANVAS"){
+        tempElement.width = this.width;
+        tempElement.height = this.height;
+      }else{
+        tempElement.style.width = (this.width+2)+"px";
+        tempElement.style.height = (this.height+2)+"px";
+      }
+      tempElement.style.top = ((window.innerHeight - this.height)/2)+"px";
+      tempElement.style.left = ((window.innerWidth - this.width)/2)+"px";
+    }
     window.setTimeout(function() {
       window.scrollTo(0,1);
     }, 1);
-    return this.gameCnvs.width/720;
+    //return this.gameCnvs.width/720;
   }
 }

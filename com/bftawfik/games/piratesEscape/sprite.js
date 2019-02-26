@@ -59,6 +59,12 @@ function createGameSprites(img){
 	gameGFX.replayBtn = {
 		sprites: new Sprite(img, 760, 111.5, 21, 19),
   }
+	gameGFX.soundBtn = {
+		sprites:[
+			new Sprite(img, 803.5, 111.5, 21, 19),
+			new Sprite(img, 782, 111.5, 21, 19),
+		],
+  }
 	gameGFX.numbers = {
 		sprites:[
 			new Sprite(img, 385.5, 145.5, 13, 15.5),
@@ -75,6 +81,9 @@ function createGameSprites(img){
   }
 	gameGFX.scoreScreen = {
 		sprites: new Sprite(img, 639, 111.5, 53.5, 26.5),
+  }
+	gameGFX.orientScreen = {
+		sprites: new Sprite(img, 639, 139, 509, 106.5),
   }
   return gameGFX;
 };
